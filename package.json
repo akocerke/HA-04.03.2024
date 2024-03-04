@@ -1,0 +1,17 @@
+{
+  "name": "ha-04.03.2024",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "AK",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  },
+  "dependencies": {
+    "@types/jest": "^29.5.12"
+  },
+  "description": ""
+}
