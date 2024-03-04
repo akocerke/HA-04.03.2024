@@ -26,4 +26,4 @@ Es darf bei Abgabe kein Test fehlschlagen. ✅
 
 
 ## Beispiel:
-<img src="image.png" alt="alt text" style="max-width: 200px; object-fit: cover;">
+<img src="image.png" alt="alt text" style="width: 200px; object-fit: cover;">
