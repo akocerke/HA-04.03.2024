@@ -1,147 +1,80 @@
-### Aufgabe 1
+# Aufgabe 1
 
+Arbeite die Unterschiede zwischen Unit, Integration und End-to-End Testing nochmal heraus.
+Dazu gehe auf Beispiel unserer Todo App ein, wie man dort die jeweiligen Testing Methoden anwenden könnte
 
-# Konzept für die Entwicklung einer Software zur Berechnung des Nettobetrags eines Gehalts
+## Unit Testing:
+Unit Testing ist eine Methode des Softwaretestens, bei der einzelne Einheiten oder Komponenten einer Software auf ihre Richtigkeit überprüft werden. Eine "Einheit" kann eine einzelne Funktion, eine Methode, ein Modul oder eine Klasse sein. Das Ziel von Unit Tests ist es, sicherzustellen, dass jede Einheit der Software isoliert und unabhängig von anderen Teilen der Anwendung korrekt funktioniert. Unit Tests werden in der Regel von Entwicklern erstellt und automatisiert ausgeführt, um sicherzustellen, dass Änderungen am Code keine unerwarteten Auswirkungen auf das Verhalten der Software haben.
 
-## 1. Analyse der steuerlichen Aspekte
+## Integration Testing:
+Integration Testing ist eine Testmethode, bei der verschiedene Einheiten oder Komponenten einer Software miteinander kombiniert und als Gruppe getestet werden. Das Ziel von Integrationstests ist es, sicherzustellen, dass die einzelnen Komponenten einer Anwendung ordnungsgemäß zusammenarbeiten und die erwarteten Ergebnisse liefern. Integrationstests werden häufig verwendet, um sicherzustellen, dass Änderungen an einer Komponente keine unerwünschten Auswirkungen auf andere Teile der Anwendung haben. Sie können automatisiert oder manuell durchgeführt werden und können verschiedene Integrationsstufen abdecken, z.B. Komponentenintegration, API-Integration oder Systemintegration.
 
-- Einkommensteuer:
-   - Die Einkommensteuer ist eine direkte Steuer auf das Einkommen einer Person und wird progressiv erhoben, das heißt, der Steuersatz steigt mit dem Einkommen.
-   Die genaue Höhe der Einkommensteuer hängt von verschiedenen Faktoren ab, darunter das Bruttoeinkommen, Familienstand, Kinderfreibeträge und steuerliche Abzüge.
-   Je nach geografischem Standort können die Steuersätze und Freibeträge variieren, da Steuersysteme von Land zu Land unterschiedlich sind.
+## End-to-End Testing:
+End-to-End Testing ist eine Testmethode, bei der die gesamte Softwareanwendung in ihrer realen Umgebung getestet wird, um sicherzustellen, dass sie den Anforderungen und Erwartungen der Benutzer entspricht. Bei End-to-End-Tests wird die Anwendung als Ganzes getestet, indem die Benutzerinteraktionen simuliert und das Verhalten der Anwendung unter realen Bedingungen überprüft werden. Das Ziel von End-to-End-Tests ist es, sicherzustellen, dass alle Funktionen der Anwendung ordnungsgemäß funktionieren und dass die Anwendung die erwarteten Ergebnisse liefert. End-to-End-Tests können automatisiert oder manuell durchgeführt werden und decken typischerweise den gesamten Anwendungsfluss von der Benutzereingabe bis zur Ausgabe ab.
 
-- Sozialabgaben:
-   - Zu den Sozialabgaben gehören Beiträge zur Krankenversicherung, Rentenversicherung, Arbeitslosenversicherung und Pflegeversicherung.
-   Diese Beiträge können je nach Beschäftigungsstatus und Einkommenshöhe variieren, da bestimmte Einkommensgrenzen gelten und die Beiträge anteilig vom Arbeitnehmer und Arbeitgeber getragen werden.
+## Erklärt anhand der ToDo App
 
-- Solidaritätszuschlag:
-   - Der Solidaritätszuschlag ist eine zusätzliche Steuer, die auf die Einkommensteuer erhoben wird und dazu dient, den Aufbau Ost und andere Solidaritätsleistungen zu finanzieren.
-   Dieser Zuschlag beträgt in der Regel einen festen Prozentsatz des zu versteuernden Einkommens.
+### Unit Testing 
+Testen einzelner Einheiten (z.B. Funktionen, Methoden) isoliert voneinander.
+##
+```
+fetchAllTodos
+``` 
+Ein Unit Test, dass die Funktion die Liste aller Todos erfolgreich abruft.
 
-- Kirchensteuer:
-   - Die Kirchensteuer ist eine von den Kirchen erhobene Steuer auf das Einkommen ihrer Mitglieder.
-   Sie ist abhängig von der Religionszugehörigkeit und beträgt in der Regel einen bestimmten Prozentsatz der Einkommensteuer.
+```
+fetchTodoById
+```
+Ein Unit Test, dass die Funktion ein Todo anhand seiner Id erfolgreich abruft.
 
-## 2. Berücksichtigung der Sozialversicherungsbeiträge
+```
+fetchUserTodos
+```
+Ein Unit Test, dass die Funktion alle Todos eines bestimmten Benutzers anhand der userId erfolgreich abruft.
+##
+### Integration Testing 
+Testen der Integration und Zusammenarbeit von mehreren Einheiten oder Komponenten.
+##
+z.B. der Integration Test ```test("Teste fetchUserTodos Funktion", async () =>``` der sicherstellt, dass die Funktion fetchUserTodos erfolgreich mit der Datenbank interagiert, um alle Todos eines bestimmten Benutzers abzurufen. 
+In diesem Test werden sowohl die Funktion fetchUserTodos als auch die HTTP-Anfrage an die Datenbank über axios.get überprüft, um sicherzustellen, dass sie wie erwartet funktionieren und die erwarteten Daten zurückgeben.
 
-- Krankenversicherung:
-   - Arbeitnehmer und Arbeitgeber tragen jeweils einen bestimmten Prozentsatz des Bruttogehalts zur Krankenversicherung bei.
-   Für Selbstständige gelten spezielle Regelungen, da sie ihre Krankenversicherung selbst organisieren müssen.
+##
+### End-to-End Testing
+Testen der gesamten Anwendung oder eines Teils davon in einer realen Umgebung unter Berücksichtigung aller beteiligten Komponenten und Systeme.
+##
 
-- Rentenversicherung:
-   - Auch hier zahlen Arbeitnehmer und Arbeitgeber jeweils einen festgelegten Prozentsatz zur Rentenversicherung.
-   Selbstständige haben die Möglichkeit, sich freiwillig in die Rentenversicherung einzukaufen.
+1. **Beschreibung:** Ein Benutzer erstellt ein neues Todo, überprüft, ob es erfolgreich erstellt wurde, markiert es dann als erledigt und überprüft erneut, ob das Todo korrekt als erledigt markiert wurde.
 
-- Arbeitslosenversicherung:
-   - Die Beiträge zur Arbeitslosenversicherung werden sowohl von Arbeitnehmern als auch von Arbeitgebern getragen.
-   Selbstständige können sich freiwillig versichern, um im Falle von Arbeitslosigkeit Leistungen zu erhalten.
+2. **Testschritte:**
+   - Der Test beginnt auf der Startseite der Todo-App.
+   - Der Benutzer klickt auf die Schaltfläche zum Erstellen eines neuen Todos.
+   - Der Benutzer gibt die erforderlichen Informationen für das neue Todo ein, wie z.B. den Titel der Aufgabe und das Fälligkeitsdatum.
+   - Der Benutzer klickt auf die Schaltfläche zum Speichern des Todos.
+   - Das Todo wird in der Liste der Todos angezeigt.
+   - Der Benutzer überprüft, ob das erstellte Todo korrekt in der Liste angezeigt wird.
+   - Der Benutzer klickt auf das erstellte Todo, um es zu öffnen.
+   - Der Benutzer markiert das Todo als erledigt.
+   - Das Todo wird als erledigt markiert.
+   - Der Benutzer überprüft, ob das Todo erfolgreich als erledigt markiert ist und in der Liste der erledigten Todos angezeigt wird.
 
-- Pflegeversicherung:
-   - Dieser Beitrag wird für die Pflegeversicherung gezahlt und sowohl von Arbeitnehmern als auch von Arbeitgebern getragen.
-   Auch hier haben Selbstständige die Möglichkeit, sich freiwillig zu versichern.
+3. **Erwartete Ergebnisse:**
+   - Das Todo wird erfolgreich erstellt und in der Liste der Todos angezeigt.
+   - Das Todo wird erfolgreich als erledigt markiert und in der Liste der erledigten Todos angezeigt.
 
-## 3. Abzüge und Zulagen
+4. **Testablauf:**
+   - Öffnen der Todo-App im Browser.
+   - Klicken auf die Schaltfläche zum Erstellen eines neuen Todos.
+   - Eingeben eines Titels und das Fälligkeitsdatum für das neue Todo.
+   - Klicken auf die Schaltfläche zum Speichern des Todos.
+   - Überprüfen, ob das Todo in der Liste der Todos angezeigt wird.
+   - Klicken auf das erstellte Todo, um es zu öffnen.
+   - Markieren des Todo als erledigt.
+   - Überprüfen, ob das Todo erfolgreich als erledigt markiert ist und in der Liste der erledigten Todos angezeigt wird.
 
-### Abzüge:
+5. **Erwartete Fehler:**
+   - Das Todo wird nicht erstellt oder nicht korrekt angezeigt.
+   - Das Todo kann nicht als erledigt markiert werden oder wird nicht korrekt in der Liste der erledigten Todos angezeigt.
 
-- Pendlerpauschale:
-In einigen Ländern können Pendler eine Pendlerpauschale geltend machen, um die Kosten für den Weg zur Arbeit steuerlich abzusetzen.
-
-- Kinderfreibetrag:
-Eltern können in einigen Ländern einen Kinderfreibetrag geltend machen, um ihre Steuerlast zu verringern.
-
-- Krankenversicherungsbeiträge:
-Einige Länder erheben obligatorische Krankenversicherungsbeiträge, die vom Bruttogehalt abgezogen werden.
-
-### Zulagen:
-- Kinderzulage:
-Arbeitnehmer mit Kindern können in einigen Ländern eine Kinderzulage erhalten, die zu ihrem Gehalt hinzugefügt wird.
-
-- Schichtzulagen:
-In Branchen mit Schichtarbeit können Arbeitnehmer zusätzliche Zulagen für Nacht- oder Wochenendschichten erhalten.
-
-- Gefahrenzulage:
-Arbeitnehmer in bestimmten risikoreichen Berufen können eine Gefahrenzulage erhalten.
-
-## 4. Zusätzliche Faktoren
-
-- Bonuszahlungen:
-
-   Bonuszahlungen sind zusätzliche Vergütungen, die ein Arbeitnehmer für besondere Leistungen oder Ergebnisse erhält.
-   Sie können einmalig oder regelmäßig sein und müssen in die Berechnung des zu versteuernden Einkommens einbezogen werden.
-
-- Sachleistungen:
-
-   Sachleistungen sind nicht-monetäre Leistungen, die ein Arbeitnehmer vom Arbeitgeber erhält, wie z.B. Firmenwagen, Mahlzeiten oder Dienstwohnungen.
-   Diese Sachleistungen haben einen geldwerten Vorteil, der in die Berechnung des zu versteuernden Einkommens einbezogen werden muss.
-
-- Steuerfreie Einkommensbestandteile:
-
-   Einige Einkommensbestandteile sind steuerfrei, was bedeutet, dass sie nicht in die Berechnung der Einkommensteuer einbezogen werden.
-   Dies kann beispielsweise bestimmte Sozialleistungen, Zuschüsse für Kinderbetreuung oder steuerfreie Zulagen für bestimmte Berufe umfassen.
-
-
-
-## Eingabeparameter
-
-1. **Bruttoeinkommen**: Der Betrag des Bruttoeinkommens, das der Mitarbeiter verdient.
-
-2. **Abrechnungszeitraum**: Der Zeitraum, für den das Gehalt berechnet wird (z. B. Jahr oder Monat).
-
-3. **Geldwerter Vorteil**: Wert monetärer Vorteile, die der Mitarbeiter von seinem Arbeitgeber erhält, wie z. B. Firmenwagen oder andere Sachleistungen.
-
-4. **Abrechnungsjahr**: Das Jahr, für das die Gehaltsabrechnung durchgeführt wird.
-
-5. **Jährlicher Steuerfreibetrag**: Der Betrag, der jährlich steuerfrei bleibt.
-
-6. **Steuerklasse**: Die Steuerklasse des Mitarbeiters gemäß den deutschen Steuergesetzen.
-
-7. **Mitgliedschaft in der Kirche**: Gibt an, ob der Mitarbeiter Mitglied einer Kirche ist oder nicht, da dies die Kirchensteuer beeinflussen kann.
-
-8. **Bundesland**: Das Bundesland, in dem der Mitarbeiter arbeitet, da die Steuersätze und -freibeträge sowie die Sozialversicherungsbeiträge je nach Bundesland variieren können.
-
-9. **Alter**: Das Alter des Mitarbeiters, da dies in einigen Fällen Auswirkungen auf die Steuerberechnung haben kann.
-
-10. **Kinder**: Informationen darüber, ob der Mitarbeiter Kinder hat oder nicht, da dies bestimmte steuerliche Vorteile beeinflussen kann.
-
-11. **Krankenversicherung**: Die Art der Krankenversicherung des Mitarbeiters (gesetzlich oder privat), da dies die Höhe der Krankenversicherungsbeiträge beeinflusst.
-
-12. **KV-Zusatzbeitrag**: Der Zusatzbeitragssatz zur Krankenversicherung, der je nach Krankenkasse variieren kann.
-
-13. **Rentenversicherung**: Die Art der Rentenversicherung des Mitarbeiters (gesetzlich oder privat), da dies die Höhe der Rentenversicherungsbeiträge beeinflusst.
-
-14. **Arbeitslosenversicherung**: Informationen darüber, ob der Mitarbeiter arbeitslosenversichert ist oder nicht, da dies die Höhe der Arbeitslosenversicherungsbeiträge beeinflusst.
-
-## Konzeptentwicklung und TDD Ansatz:
-
-1. Testfälle definieren: 
-   - Identifizieren aller relevanten Szenarien und Randbedingungen, die bei der Gehaltsberechnung auftreten können, wie verschiedene Beschäftigungsstatus, Einkommensniveaus und geografische Standorte.
-
-2. Tests schreiben: 
-   - Testfälle schreiben für jeden identifizierten Anwendungsfall. Beginnen mit einfachen Testfällen und schrittweise erweitern, um alle Aspekte der Gehaltsberechnung abzudecken.
-
-3. Implementierung: 
-   - Implementiern der Software, um die Testfälle zu erfüllen. Beginnen mit dem einfachsten Fall und vorarbeiten zu komplexeren Szenarien.
-
-4. Tests ausführen: 
-   - Geschriebenen Tests ausführen, um sicherzustellen, dass die Implementierung korrekt funktioniert und alle Testfälle bestanden werden.
-
-5. Refaktorisierung: 
-   - Überprüfen und verbessern der Implementierung, um sie lesbarer, effizienter und wartungsfreundlicher zu gestalten, ohne dabei die Funktionalität zu beeinträchtigen.
-
-6. Wiederholung: 
-   - Iterieren den Prozess, um sicherzustellen, dass die Software kontinuierlich getestet, implementiert und verbessert wird.
-
-### Beispiel Testfälle:
-1. Ein Vollzeitangestellter mit einem Bruttogehalt von 5000 EUR in Deutschland, inklusive Bonuszahlung.
-Erwartetes Ergebnis: Nettogehalt unter Berücksichtigung aller steuerlichen Aspekte und Sozialversicherungsbeiträge.
-
-2. Ein Teilzeitangestellter mit einem Bruttogehalt von 3000 EUR in den USA, inklusive Sonderleistungen.
-Erwartetes Ergebnis: Nettogehalt unter Berücksichtigung der US-amerikanischen Steuerregelungen und spezifischer Abzüge/Zulagen.
-
-3. Ein Selbstständiger mit einem Bruttogehalt von 7000 EUR in Großbritannien.
-Erwartetes Ergebnis: Nettogehalt unter Berücksichtigung der britischen Steuerregelungen für Selbstständige und optionaler Rentenversicherungsbeiträge.
-
-4. Ein Angestellter mit einem Bruttogehalt von 6000 EUR in Frankreich und einem Bonus von 1000 EUR, inklusive Schichtzulagen.
-Erwartetes Ergebnis: Nettogehalt unter Berücksichtigung der französischen Steuerregelungen und spezifischer Zusatzzahlungen.
-Durch die Implementierung und Testung dieser Fälle können wir sicherstellen, dass die Software alle relevanten Aspekte der Gehaltsberechnung korrekt behandelt und zuverlässige Ergebnisse liefert.
+6. **Zusätzliche Überlegungen:**
+   - Sicher stellen, dass die Testumgebung den Zustand der Anwendung und der Datenbank zurücksetzt, um konsistente Ergebnisse zu gewährleisten.
+   - Überprüfung der Funktionalität in verschiedenen Browsern und Geräten, um sicherzustellen, dass die Anwendung plattformübergreifend korrekt funktioniert.
