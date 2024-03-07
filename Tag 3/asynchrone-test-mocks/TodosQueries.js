@@ -9,15 +9,29 @@ async function fetchAllTodos() {
 }
 
 async function fetchTodoById(todoId) {
-  const result = await api.get("http://localhost:5051/v1/todos/byid", {
+  const result = await axios.get("http://localhost:5051/v1/todos/byid", {
     params: { todoId },
   });
 
-  const todo = result.data.todo;
+  const todo = result.data.todo; // Zugriff auf die Daten des Antwortobjekts
 
   console.log("Mein Todo /byid", todo);
 
   return todo;
 }
 
-module.exports = { fetchAllTodos, fetchTodoById };
+
+async function fetchUserTodos(userId) {
+  const result = await axios.get("http://localhost:5051/v1/todos/byuserid", {
+    params: { userId },
+  });
+
+  const todos = result.data.todos; 
+
+  console.log("Mein Todo /byuserid", todos);
+
+  return todos;
+}
+
+
+module.exports = { fetchAllTodos, fetchTodoById, fetchUserTodos};
