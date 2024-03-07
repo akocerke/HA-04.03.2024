@@ -25,7 +25,10 @@ describe("Testing GET Functions of Todo Route", () => {
     expect(result).toEqual(mockData.data);
     expect(axios.get).toHaveBeenCalledTimes(1);
     expect(axios.get).toHaveBeenCalledWith(
-      "http://localhost:5051/v1/todos/all"
+      "http://localhost:5051/v1/todos/all"  // <= Die Funktion toHaveBeenCalledWith wird verwendet, 
+                                            // um zu überprüfen, ob eine bestimmte Funktion, in diesem Fall axios.get, 
+                                            // mit bestimmten Parametern aufgerufen wurde.
+                                            // ob axios.get mit dem Argument "http://localhost:5051/v1/todos/all" aufgerufen wird
     );
   });
 });
